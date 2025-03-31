@@ -1,0 +1,47 @@
+<div class="clientes-container">
+  <h3>Gestión de Clientes</h3>
+  <form [formGroup]="clienteForm" (ngSubmit)="crearCliente()" class="nuevo-cliente">
+    <div class="form-group">
+      <input formControlName="nombre" placeholder="Nombre">
+      <div *ngIf="submitted && f['nombre'].errors" class="error-message">
+        <div *ngIf="f['nombre'].errors['required']">El nombre es requerido</div>
+        <div *ngIf="f['nombre'].errors['minlength']">El nombre debe tener al menos 3 caracteres</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input formControlName="email" type="email" placeholder="Email">
+      <div *ngIf="submitted && f['email'].errors" class="error-message">
+        <div *ngIf="f['email'].errors['required']">El email es requerido</div>
+        <div *ngIf="f['email'].errors['email']">Email inválido</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input formControlName="telefono" placeholder="Teléfono">
+      <div *ngIf="submitted && f['telefono'].errors" class="error-message">
+        <div *ngIf="f['telefono'].errors['required']">El teléfono es requerido</div>
+        <div *ngIf="f['telefono'].errors['pattern']">El teléfono debe tener 9 dígitos</div>
+      </div>
+    </div>
+
+    <button type="submit">Agregar Cliente</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientes">
+        <td>{{ cliente.nombre }}</td>
+        <td>{{ cliente.email }}</td>
+        <td>{{ cliente.telefono }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div> 

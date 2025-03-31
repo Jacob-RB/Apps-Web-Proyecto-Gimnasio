@@ -1,0 +1,46 @@
+<div class="productos-container">
+  <h3>Gestión de Productos</h3>
+  <form [formGroup]="productoForm" (ngSubmit)="crearProducto()" class="nuevo-producto">
+    <div class="form-group">
+      <input formControlName="nombre" placeholder="Nombre">
+      <div *ngIf="submitted && f['nombre'].errors" class="error-message">
+        <div *ngIf="f['nombre'].errors['required']">El nombre es requerido</div>
+        <div *ngIf="f['nombre'].errors['minlength']">El nombre debe tener al menos 3 caracteres</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input formControlName="precio" type="number" placeholder="Precio">
+      <div *ngIf="submitted && f['precio'].errors" class="error-message">
+        <div *ngIf="f['precio'].errors['required']">El precio es requerido</div>
+        <div *ngIf="f['precio'].errors['min']">El precio debe ser mayor a 0</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input formControlName="stock" type="number" placeholder="Stock">
+      <div *ngIf="submitted && f['stock'].errors" class="error-message">
+        <div *ngIf="f['stock'].errors['required']">El stock es requerido</div>
+        <div *ngIf="f['stock'].errors['min']">El stock debe ser mayor a 0</div>
+      </div>
+    </div>
+
+    <button type="submit">Agregar Producto</button>
+  </form>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Stock</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos">
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.precio | currency }}</td>
+        <td>{{ producto.stock }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div> 
